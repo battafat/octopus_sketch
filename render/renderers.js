@@ -13,3 +13,10 @@ export function renderTentacle(tentacle){
     strokeWeight(4);
     line(tentacle.x, tentacle.y, tentacle.x, tentacle.y + tentacle.length);
 }
+
+export function renderBasket(basket){
+    // console.log("rendering basket at:", basket.x, basket.y, "width:", basket.width);
+    fill(204, 102, 0);
+    rectMode(CENTER);
+    square(basket.x, basket.y, basket.width);
+}
