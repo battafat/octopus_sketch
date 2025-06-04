@@ -2,6 +2,9 @@ export function renderHotAirBallon(hotAirBalloon){
     renderBalloon(hotAirBalloon.balloon);
     renderBasket(hotAirBalloon.basket);
     renderTentacle(hotAirBalloon.tentacle);
+    renderTentacle(hotAirBalloon.tentacle2);
+    renderTentacle(hotAirBalloon.tentacle3);
+    renderTentacle(hotAirBalloon.tentacle4);
 }
 
 export function renderBalloon(balloon){
@@ -19,6 +22,8 @@ export function renderTentacle(tentacle){
 export function renderBasket(basket){
     // console.log("rendering basket at:", basket.x, basket.y, "width:", basket.width);
     fill(204, 102, 0);
-    rectMode(CENTER);
-    square(basket.x, basket.y, basket.width);
+    stroke(100);
+    rectMode(CORNERS);
+    //Draws rectangle between top left corner and bottom right corner
+    rect(basket.corner1.x, basket.corner1.y, basket.corner2.x, basket.corner2.y + (basket.corner2.x - basket.corner1.x));
 }

@@ -8,9 +8,9 @@ let currentBalloon;
 function setup() {
   createCanvas(400, 400);
   currentBalloon = new HotAirBalloon(width / 2, height / 2 - 50, width / 2, height/4);
-  createButton("New Balloon").mousePressed(() => {
-    currentBalloon = new Balloon(random(width), random(height));
-  });
+  // createButton("New Balloon").mousePressed(() => {
+  //   currentBalloon = new Balloon(random(width), random(height));
+  // });
 }
 
 function draw() {
