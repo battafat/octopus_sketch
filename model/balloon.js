@@ -23,39 +23,31 @@ export class Balloon {
         this.radius = radius;
     }
 
-    generateBalloonPoints(){
-        // drawTopHalfOctopusBody(center_x, center_y){
-        // beginShape();
-        let radius = this.radius;
-        let points = [];
-        let total_degrees = 360;
-        while (radius < 75){
-            for (let i = 0; i < total_degrees; i++) {
-                let angle = radians(i);
-                // noise is a p5.js function. Does this mean generateBalloonPoints belongs in renderers?
-                // I'm trying to keep models free of p5.js library.
-                let noiseFactor = noise(i * 0.02, float(frameCount) / 150);
-                let x = this.center_x + this.radius * cos(angle) * noiseFactor;
-                let y = this.center_y + this.radius * sin(angle) * noiseFactor;
-                points.push({x, y});
-                console.log(`x: ${x}, y: ${y}`);
+    generateBalloonPoints() {
+        const allPoints = [];
+        const totalDegrees = 360;
 
-                // curveVertex(xPoint, yPoint);
-                radius += 1;
+        for (let r = 0; r <= this.radius; r += 1) {
+            const circlePoints = [];
+
+            for (let i = 0; i < totalDegrees; i++) {
+                const angle = radians(i);
+                const noiseFactor = noise(i * 0.02, float(frameCount) / 150);
+                const x = this.center_x + r * cos(angle) * noiseFactor;
+                const y = this.center_y + r * sin(angle) * noiseFactor;
+                circlePoints.push({ x, y });
             }
-            // if (radius == 75) {
-            //     stroke(100, 20);
-            //     endShape(CLOSE);
-            //     noLoop();
-            // }
-            
+
+            allPoints.push(circlePoints);
         }
-        return points
+
+        return allPoints; // Array of arrays of points
+      }
         //what happens if you move this into draw()?
             // endShape(CLOSE);
         //   }
-    }
 }
+
 
 
 export class Tentacle {

@@ -13,18 +13,22 @@ export function renderBalloon(balloon){
         ellipse(balloon.x, balloon.y, balloon.width, balloon.height);
     }
 
-export function renderFlowerBalloon(balloon){
+export function renderFlowerBalloon(balloon) {
+    const allCircles = balloon.generateBalloonPoints();
 
-    const points = balloon.generateBalloonPoints();
-    console.log("points length:", points.length); // in renderFlowerBalloon
     noFill();
-    stroke(0);
-    beginShape();
-    for (const point of points) {
-        curveVertex(point.x, point.y);
-      }
-    endShape();
+    stroke(0, 100); // Add some alpha if needed
+    strokeWeight(1);
+
+    for (const circle of allCircles) {
+        beginShape();
+        for (const point of circle) {
+            vertex(point.x, point.y); // use vertex or curveVertex
+        }
+        endShape(CLOSE);
+    }
 }
+      
 
 export function renderTentacle(tentacle){
     stroke(0);
