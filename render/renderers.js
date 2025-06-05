@@ -17,7 +17,7 @@ export function renderFlowerBalloon(balloon) {
     const allCircles = balloon.generateBalloonPoints();
 
     noFill();
-    stroke(0, 100); // Add some alpha if needed
+    stroke(200, 20); // Add some alpha if needed
     strokeWeight(1);
 
     for (const circle of allCircles) {
