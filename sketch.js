@@ -6,7 +6,7 @@ import { Basket } from './model/balloon.js';
 import { renderBalloon, renderBasket, renderHotAirBallon, renderFlowerBalloon } from './render/renderers.js';
 
 let flowerBalloon;
-
+let cachedCircles;
 function setup() {
   createCanvas(400, 400);
   // currentBalloon = new HotAirBalloon(width / 2, height / 2 - 50, width / 2, height/4);
@@ -15,13 +15,14 @@ function setup() {
   //   currentBalloon = new Balloon(random(width), random(height));
   // });
   flowerBalloon = new Balloon(width / 2, height / 2, 200);
+  cachedCircles = flowerBalloon.generateBalloonPoints();
 }
 
 function draw() {
   background(50);
   // renderHotAirBallon(currentBalloon);
   console.log('Drawing frame');
-  renderFlowerBalloon(flowerBalloon);
+  renderFlowerBalloon(cachedCircles);
 }
 
 window.setup = setup;
