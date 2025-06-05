@@ -13,6 +13,19 @@ export function renderBalloon(balloon){
         ellipse(balloon.x, balloon.y, balloon.width, balloon.height);
     }
 
+export function renderFlowerBalloon(balloon){
+
+    const points = balloon.generateBalloonPoints();
+    console.log("points length:", points.length); // in renderFlowerBalloon
+    noFill();
+    stroke(0);
+    beginShape();
+    for (const point of points) {
+        curveVertex(point.x, point.y);
+      }
+    endShape();
+}
+
 export function renderTentacle(tentacle){
     stroke(0);
     strokeWeight(4);

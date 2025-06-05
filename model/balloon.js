@@ -1,7 +1,7 @@
 export class HotAirBalloon {
     constructor(x, y, width, height) {
-        this.x = x;
-        this.y = y;
+        this.center_x = x;
+        this.center_y = y;
         this.width = width;
         this.height = height;
         // Create one balloon
@@ -17,13 +17,46 @@ export class HotAirBalloon {
 }
 
 export class Balloon {
-    constructor(x, y, width, height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    constructor(x, y, radius) {
+        this.center_x = x;
+        this.center_y = y;
+        this.radius = radius;
+    }
+
+    generateBalloonPoints(){
+        // drawTopHalfOctopusBody(center_x, center_y){
+        // beginShape();
+        let radius = this.radius;
+        let points = [];
+        let total_degrees = 360;
+        while (radius < 75){
+            for (let i = 0; i < total_degrees; i++) {
+                let angle = radians(i);
+                // noise is a p5.js function. Does this mean generateBalloonPoints belongs in renderers?
+                // I'm trying to keep models free of p5.js library.
+                let noiseFactor = noise(i * 0.02, float(frameCount) / 150);
+                let x = this.center_x + this.radius * cos(angle) * noiseFactor;
+                let y = this.center_y + this.radius * sin(angle) * noiseFactor;
+                points.push({x, y});
+                console.log(`x: ${x}, y: ${y}`);
+
+                // curveVertex(xPoint, yPoint);
+                radius += 1;
+            }
+            // if (radius == 75) {
+            //     stroke(100, 20);
+            //     endShape(CLOSE);
+            //     noLoop();
+            // }
+            
+        }
+        return points
+        //what happens if you move this into draw()?
+            // endShape(CLOSE);
+        //   }
     }
 }
+
 
 export class Tentacle {
     constructor(x, y, a, b) {
