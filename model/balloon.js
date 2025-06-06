@@ -26,23 +26,24 @@ export class Balloon {
     generateBalloonPoints() {
         const allPoints = [];
         const totalDegrees = 360;
-
+        let mimickFrameCount = 0;
         for (let r = 0; r <= this.radius; r += 1) {
             const circlePoints = [];
 
             for (let i = 0; i < totalDegrees; i++) {
                 const angle = radians(i);
-                const noiseFactor = noise(i * 0.02, float(frameCount) / 150);
+                const noiseFactor = noise(i * 0.02, mimickFrameCount / 150);
+                // const noiseFactor = noise(i * 0.02, float(frameCount) / 150);
                 const x = this.center_x + r * cos(angle) * noiseFactor;
                 const y = this.center_y + r * sin(angle) * noiseFactor;
                 circlePoints.push({ x, y });
             }
-
+            mimickFrameCount += 1;
             allPoints.push(circlePoints);
         }
 
         return allPoints; // Array of arrays of points
-      }
+    }
         //what happens if you move this into draw()?
             // endShape(CLOSE);
         //   }

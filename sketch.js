@@ -14,9 +14,9 @@ function setup() {
   // createButton("New Balloon").mousePressed(() => {
   //   currentBalloon = new Balloon(random(width), random(height));
   // });
-  flowerBalloon = new Balloon(width / 2, height / 2, width/2);
+  flowerBalloon = new Balloon(width / 2, height / 2, width/4);
   cachedCircles = flowerBalloon.generateBalloonPoints();
-  // noLoop();
+  noLoop();
 }
 
 function draw() {

@@ -20,23 +20,42 @@ export function renderFlowerBalloon(points) {
     stroke(200, 20); // Add some alpha if needed
     strokeWeight(1);
     let yOffSet = 0;
-    for (const circle of allCircles) {
+    for (let i = allCircles.length - 1; i >= 0; i--) {
         beginShape();
-        for (const point of circle) {
+        for (const point of allCircles[i]) {
             vertex(point.x, point.y + yOffSet); // use vertex or curveVertex
         }
-        yOffSet += 1;
-        endShape(CLOSE);
+        yOffSet -= 1;
+        // xOffSet -= 1;
+        // if (i >= 75){
+        //     stroke(100);
+        //     endShape(CLOSE);
+        // }
+        endShape();
     }
-    yOffSet = 0
-    for (const circle of allCircles) {
+    yOffSet = 0;
+    for (let i = allCircles.length - 1; i >= 0; i--) {
         beginShape();
-        for (const point of circle) {
-            vertex(point.x, point.y - yOffSet); // use vertex or curveVertex
+        for (const point of allCircles[i]) {
+            vertex(point.x, point.y + yOffSet); // use vertex or curveVertex
         }
-        yOffSet += 1;
-        endShape(CLOSE);
+        // might be worth making this into a separate function?
+        // either a separate function that draws the the halves, bottom with smaller yOffSet. 
+        // OR generate a separate set of points for the bottom and top halves
+        yOffSet += .5;
+        endShape();
     }
+    
+
+    // yOffSet = 0
+    // for (const circle of allCircles) {
+    //     beginShape();
+    //     for (const point of circle) {
+    //         vertex(point.x, point.y - yOffSet); // use vertex or curveVertex
+    //     }
+    //     yOffSet += 1;
+    //     endShape(CLOSE);
+    // }
     // translate(0, -frameCount);
     // for (const circle of allCircles) {
     //     beginShape();
