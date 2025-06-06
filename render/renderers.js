@@ -19,22 +19,32 @@ export function renderFlowerBalloon(points) {
     noFill();
     stroke(200, 20); // Add some alpha if needed
     strokeWeight(1);
-
+    let yOffSet = 0;
     for (const circle of allCircles) {
         beginShape();
         for (const point of circle) {
-            vertex(point.x, point.y); // use vertex or curveVertex
+            vertex(point.x, point.y + yOffSet); // use vertex or curveVertex
         }
+        yOffSet += 1;
         endShape(CLOSE);
     }
-    translate(0, frameCount);
+    yOffSet = 0
     for (const circle of allCircles) {
         beginShape();
         for (const point of circle) {
-            vertex(point.x, point.y); // use vertex or curveVertex
+            vertex(point.x, point.y - yOffSet); // use vertex or curveVertex
         }
+        yOffSet += 1;
         endShape(CLOSE);
     }
+    // translate(0, -frameCount);
+    // for (const circle of allCircles) {
+    //     beginShape();
+    //     for (const point of circle) {
+    //         vertex(point.x, point.y); // use vertex or curveVertex
+    //     }
+    //     endShape(CLOSE);
+    // }
 }
       
 

@@ -8,14 +8,15 @@ import { renderBalloon, renderBasket, renderHotAirBallon, renderFlowerBalloon } 
 let flowerBalloon;
 let cachedCircles;
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(800, 800);
   // currentBalloon = new HotAirBalloon(width / 2, height / 2 - 50, width / 2, height/4);
   background(50);
   // createButton("New Balloon").mousePressed(() => {
   //   currentBalloon = new Balloon(random(width), random(height));
   // });
-  flowerBalloon = new Balloon(width / 2, height / 2, 200);
+  flowerBalloon = new Balloon(width / 2, height / 2, width/2);
   cachedCircles = flowerBalloon.generateBalloonPoints();
+  // noLoop();
 }
 
 function draw() {
