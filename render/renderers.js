@@ -1,5 +1,9 @@
 export function renderHotAirBalloon(hotAirBalloon){
     renderFlowerBalloon(hotAirBalloon.flowerBalloonTopHalfPoints);
+    beginShape();
+    stroke('orange');
+    ellipse(hotAirBalloon.center_x, hotAirBalloon.center_y, 50, 10);
+    endShape();
     renderBasket(hotAirBalloon.basket);
     renderTentacle(hotAirBalloon.tentacle);
     renderTentacle(hotAirBalloon.tentacle2);
