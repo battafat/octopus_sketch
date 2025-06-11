@@ -8,20 +8,18 @@ let flowerBalloonTopHalfPoints;
 let flowerBalloon;
 let cachedCircles;
 let hotAirBalloon;
+let currentBalloon;
 function setup() {
   createCanvas(800, 800);
   // currentBalloon = new HotAirBalloon(width / 2, height / 2 - 50, width / 2, height/4);
   background(50);
-  // createButton("New Balloon").mousePressed(() => {
-  //   currentBalloon = new Balloon(random(width), random(height));
-  // });
-  hotAirBalloon = new HotAirBalloon(width / 2, height / 2, width / 4);
-  flowerBalloonTopHalfPoints = hotAirBalloon.flowerBalloonTopHalfPoints
+  currentBalloon = new HotAirBalloon(width / 2, height / 2, width / 4);
+  // flowerBalloonTopHalfPoints = hotAirBalloon.flowerBalloonTopHalfPoints
+  createButton("New Balloon").mousePressed(() => {
+    currentBalloon = new HotAirBalloon(random(width/2), random(height/2), random(width/2));
+    redraw();
+  });
   
-  console.log("flowerBalloonTopHalfPoints", hotAirBalloon.flowerBalloonTopHalfPoints);
-  // console.log(flowerBalloonTopHalfPoints[0][0]); // Inspect first point of first layer
-
-  console.log("cachedBalloonPoints:", hotAirBalloon.cachedBalloonPoints);
   // flowerBalloon = new Balloon(width / 2, height / 2, width/4);
   // cachedCircles = flowerBalloon.generateBalloonPoints();
   noLoop();
@@ -29,8 +27,8 @@ function setup() {
 
 function draw() {
   background(0);
-  if (hotAirBalloon) {
-    renderHotAirBalloon(hotAirBalloon);
+  if (currentBalloon) {
+    renderHotAirBalloon(currentBalloon);
   }
   console.log('Drawing frame');
   // renderFlowerBalloon(cachedCircles);
