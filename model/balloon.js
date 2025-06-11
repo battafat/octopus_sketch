@@ -1,4 +1,5 @@
 export class HotAirBalloon {
+    center_x;
     center_y;
     radius;
     balloon;
@@ -29,10 +30,10 @@ export class HotAirBalloon {
         // create one basket
         this.basket = new Basket(new Point(this.balloon.x - (this.balloon.radius / 8), this.balloon.y + 150), new Point(this.balloon.x + this.balloon.radius / 8, this.balloon.y + 150));
         // Create one tentacle hanging from the bottom-center of the balloon
-        this.tentacle = new Tentacle(balloonAttach4.x, balloonAttach4.y, this.basket.attachmentPoint1.x, this.basket.attachmentPoint1.y);
-        this.tentacle2 = new Tentacle(balloonAttach3.x, balloonAttach3.y, this.basket.attachmentPoint2.x, this.basket.attachmentPoint2.y);
-        this.tentacle3 = new Tentacle(balloonAttach2.x, balloonAttach2.y, this.basket.attachmentPoint3.x, this.basket.attachmentPoint3.y);
-        this.tentacle4 = new Tentacle(balloonAttach1.x, balloonAttach1.y, this.basket.attachmentPoint4.x, this.basket.attachmentPoint4.y);
+        this.tentacle = new Tentacle(balloonAttach1.x, balloonAttach1.y, this.basket.attachmentPoint1.x, this.basket.attachmentPoint1.y);
+        this.tentacle2 = new Tentacle(balloonAttach2.x, balloonAttach2.y, this.basket.attachmentPoint2.x, this.basket.attachmentPoint2.y);
+        this.tentacle3 = new Tentacle(balloonAttach3.x, balloonAttach3.y, this.basket.attachmentPoint3.x, this.basket.attachmentPoint3.y);
+        this.tentacle4 = new Tentacle(balloonAttach4.x, balloonAttach4.y, this.basket.attachmentPoint4.x, this.basket.attachmentPoint4.y);
     }
 }
 
@@ -95,10 +96,10 @@ export class Balloon {
         const fourPoints = [];
         const opening = circlesList[45];
         if (opening.length >= 360) {
-            fourPoints.push(opening[0]);
+            fourPoints.push(opening[180]);
+            fourPoints.push(opening[100]);
             fourPoints.push(opening[80]);
-            fourPoints.push(opening[160]);
-            fourPoints.push(opening[240]);
+            fourPoints.push(opening[0]);
         }
         return fourPoints;
     }
