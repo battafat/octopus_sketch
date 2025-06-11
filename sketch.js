@@ -15,8 +15,10 @@ function setup() {
   background(50);
   currentBalloon = new HotAirBalloon(width / 2, height / 2, width / 4);
   // flowerBalloonTopHalfPoints = hotAirBalloon.flowerBalloonTopHalfPoints
-  createButton("New Balloon").mousePressed(() => {
-    currentBalloon = new HotAirBalloon(random(width/2), random(height/2), random(width/2));
+  createButton("New Balloon")
+  .position(10,10)
+  .mousePressed(() => {
+    currentBalloon = new HotAirBalloon(random(width/2), random(height/2), random(width));
     redraw();
   });
   
