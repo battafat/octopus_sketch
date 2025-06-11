@@ -4,7 +4,7 @@ import { Balloon } from './model/balloon.js';
 import { Basket } from './model/balloon.js';
 // render classes
 import { renderBalloon, renderBasket, renderTentacle, renderHotAirBalloon, renderFlowerBalloon } from './render/renderers.js';
-
+let flowerBalloonTopHalfPoints;
 let flowerBalloon;
 let cachedCircles;
 let hotAirBalloon;
@@ -16,15 +16,22 @@ function setup() {
   //   currentBalloon = new Balloon(random(width), random(height));
   // });
   hotAirBalloon = new HotAirBalloon(width / 2, height / 2, width / 4);
+  flowerBalloonTopHalfPoints = hotAirBalloon.flowerBalloonTopHalfPoints
+  
+  console.log("flowerBalloonTopHalfPoints", hotAirBalloon.flowerBalloonTopHalfPoints);
+  // console.log(flowerBalloonTopHalfPoints[0][0]); // Inspect first point of first layer
+
   console.log("cachedBalloonPoints:", hotAirBalloon.cachedBalloonPoints);
   // flowerBalloon = new Balloon(width / 2, height / 2, width/4);
   // cachedCircles = flowerBalloon.generateBalloonPoints();
-  // noLoop();
+  noLoop();
 }
 
 function draw() {
   background(0);
-  renderHotAirBalloon(hotAirBalloon);
+  if (hotAirBalloon) {
+    renderHotAirBalloon(hotAirBalloon);
+  }
   console.log('Drawing frame');
   // renderFlowerBalloon(cachedCircles);
 }

@@ -1,4 +1,16 @@
 export class HotAirBalloon {
+    center_y;
+    radius;
+    balloon;
+    cachedBalloonPoints;
+    flowerBalloonTopHalfPoints;
+    balloonAttachmentPoints;
+    basket;
+    tentacle;
+    tentacle2;
+    tentacle3;
+    tentacle4;
+
     constructor(x, y, radius) {
         this.center_x = x;
         this.center_y = y;
@@ -8,15 +20,19 @@ export class HotAirBalloon {
         // Create one balloon
         this.balloon = new Balloon(this.center_x, this.center_y, this.radius);
         this.cachedBalloonPoints = this.balloon.generateBalloonPoints();
-        this.balloonAttachmentPoints = this.balloon.getBalloonAttachmentPoints(this.cachedBalloonPoints);
+        this.flowerBalloonTopHalfPoints = this.balloon.generateFlowerBalloonTopHalfPoints(this.cachedBalloonPoints, 50, 0);
+        
+        // this.topHalfAttachmentPoints = this.flowerBalloonTopHalfPoints[1];
+        const balloonAttachmentPoints = this.balloon.getBalloonAttachmentPoints(this.flowerBalloonTopHalfPoints);
+        // unpack BalloonAttachmentPoints. 
+        const [balloonAttach1, balloonAttach2, balloonAttach3, balloonAttach4] = balloonAttachmentPoints;
         // create one basket
         this.basket = new Basket(new Point(this.balloon.x - (this.balloon.radius / 8), this.balloon.y + 150), new Point(this.balloon.x + this.balloon.radius / 8, this.balloon.y + 150));
         // Create one tentacle hanging from the bottom-center of the balloon
-        
-        this.tentacle = new Tentacle(this.balloonAttachmentPoints[0].x, this.balloonAttachmentPoints[0].y, this.basket.attachmentPoint1.x, this.basket.attachmentPoint1.y);
-        this.tentacle2 = new Tentacle(this.balloonAttachmentPoints[1].x, this.balloonAttachmentPoints[1].y, this.basket.attachmentPoint2.x, this.basket.attachmentPoint2.y);
-        this.tentacle3 = new Tentacle(this.balloonAttachmentPoints[2].x, this.balloonAttachmentPoints[2].y, this.basket.attachmentPoint3.x, this.basket.attachmentPoint3.y);
-        this.tentacle4 = new Tentacle(this.balloonAttachmentPoints[3].x, this.balloonAttachmentPoints[3].y, this.basket.attachmentPoint4.x, this.basket.attachmentPoint4.y);
+        this.tentacle = new Tentacle(balloonAttach4.x, balloonAttach4.y, this.basket.attachmentPoint1.x, this.basket.attachmentPoint1.y);
+        this.tentacle2 = new Tentacle(balloonAttach3.x, balloonAttach3.y, this.basket.attachmentPoint2.x, this.basket.attachmentPoint2.y);
+        this.tentacle3 = new Tentacle(balloonAttach2.x, balloonAttach2.y, this.basket.attachmentPoint3.x, this.basket.attachmentPoint3.y);
+        this.tentacle4 = new Tentacle(balloonAttach1.x, balloonAttach1.y, this.basket.attachmentPoint4.x, this.basket.attachmentPoint4.y);
     }
 }
 
@@ -40,18 +56,44 @@ export class Balloon {
                 const noiseFactor = noise(i * 0.02, mimickFrameCount / 150);
                 // const noiseFactor = noise(i * 0.02, float(frameCount) / 150);
                 const x = this.x + r * cos(angle) * noiseFactor;
-                const y = this.y + r * sin(angle) * noiseFactor;
-                circlePoints.push({ x, y });
+                const y = this.y + r/2 * sin(angle) * noiseFactor;
+                circlePoints.push({x, y});
             }
             mimickFrameCount += 1;
             allPoints.push(circlePoints);
         }
 
+
         return allPoints; // Array of arrays of points
     }
+
+    generateFlowerBalloonTopHalfPoints(allCircles, lastCircle, yOffSet){
+        const pointsForFlowerBalloonTopHalf = [];
+        for (let i = allCircles.length - 1; i >=lastCircle; i--){
+            let currentCircle = this.renderOneCircle(allCircles[i], yOffSet);
+            pointsForFlowerBalloonTopHalf.push(currentCircle);
+            yOffSet -= .75
+        }
+        // topmostCirclePoints = pointsForFlowerBalloonTopHalf[pointsForFlowerBalloonTopHalf.length-1];
+        return pointsForFlowerBalloonTopHalf;
+    }
+
+    // generateFlowerBallonBottomHalfPoints(){
+
+    // }
+    renderOneCircle(oneCircle, yOffSet) {
+        let currentCircle = [];
+        for (const point of oneCircle) {
+            // const newY = point.y + yOffSet;
+            // const newX = point.x;
+            currentCircle.push({x: point.x, y: point.y + yOffSet}); // use vertex or curveVertex
+        }
+        return currentCircle;
+    }
+
     getBalloonAttachmentPoints(circlesList) {
         const fourPoints = [];
-        const opening = circlesList[circlesList.length - 1];
+        const opening = circlesList[45];
         if (opening.length >= 360) {
             fourPoints.push(opening[0]);
             fourPoints.push(opening[80]);
